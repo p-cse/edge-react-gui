@@ -26,7 +26,7 @@ class EdgeTextComponent extends React.PureComponent<OwnProps & ThemeProps> {
       <Text
         style={[text, style, Platform.OS === 'android' ? androidAdjust : null]}
         numberOfLines={numberOfLines}
-        allowFontScaling={!disableFontScaling}
+        allowFontScaling={false}
         adjustsFontSizeToFit={!disableFontScaling}
         minimumFontScale={0.65}
         {...props}

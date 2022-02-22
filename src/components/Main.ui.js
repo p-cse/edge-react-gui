@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react'
-import { YellowBox } from 'react-native'
+import { Text, YellowBox } from 'react-native'
 import { Drawer, Router, Scene, Stack, Tabs } from 'react-native-router-flux'
 
 import ENV from '../../env.json'
@@ -193,7 +193,8 @@ export class MainComponent extends React.Component<Props> {
 
   constructor(props: Props) {
     super(props)
-
+    Text.defaultProps = Text.defaultProps || {}
+    Text.defaultProps.allowFontScaling = false
     if (ENV.HIDE_IS_MOUNTED) {
       YellowBox.ignoreWarnings([
         'Warning: isMounted(...) is deprecated',
