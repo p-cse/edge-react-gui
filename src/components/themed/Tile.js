@@ -18,7 +18,12 @@ type OwnProps = {
   onPress?: () => void,
   title: string,
   type: 'copy' | 'editable' | 'questionable' | 'loading' | 'static' | 'touchable',
-  contentPadding?: boolean
+  contentPadding?: boolean,
+
+  // Body/Text related props
+  numberOfLines?: number,
+  ellipsizeMode?: string,
+  disableFontScaling?: boolean
 }
 type Props = OwnProps & ThemeProps
 
@@ -30,7 +35,7 @@ class TileComponent extends React.PureComponent<Props> {
   }
 
   render() {
-    const { body, title, contentPadding = true, children, theme, type, error } = this.props
+    const { body, title, contentPadding = true, children, theme, type, numberOfLines = 3, ellipsizeMode, disableFontScaling, error } = this.props
     const styles = getStyles(theme)
     const onPress = type === 'copy' ? () => this.copy() : this.props.onPress
     if (type === 'loading') {
@@ -56,7 +61,7 @@ class TileComponent extends React.PureComponent<Props> {
               {type === 'questionable' && <SimpleLineIcons name="question" style={styles.editIcon} />}
               <EdgeText style={error ? styles.textHeaderError : styles.textHeader}>{title}</EdgeText>
               {typeof body === 'string' && (
-                <EdgeText style={styles.textBody} numberOfLines={3}>
+                <EdgeText style={styles.textBody} numberOfLines={numberOfLines} ellipsizeMode={ellipsizeMode} disableFontScaling={disableFontScaling}>
                   {body}
                 </EdgeText>
               )}
