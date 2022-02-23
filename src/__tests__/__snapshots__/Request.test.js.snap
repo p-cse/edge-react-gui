@@ -19,12 +19,49 @@ exports[`Request should render with loaded props 1`] = `
         Object {
           "fontFamily": "Quicksand-Medium",
           "fontSize": 45,
-          "marginBottom": 11,
         }
       }
     >
       Request
     </WithTheme(EdgeTextComponent)>
+    <WithTheme(EdgeTextComponent)
+      style={
+        Object {
+          "fontFamily": "Quicksand-Bold",
+          "textAlign": "right",
+        }
+      }
+    >
+      1 undefined
+    </WithTheme(EdgeTextComponent)>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "marginBottom": 11,
+        }
+      }
+    >
+      <WithTheme(EdgeTextComponent)>
+        You have 0 undefined
+      </WithTheme(EdgeTextComponent)>
+      <WithTheme(EdgeTextComponent)
+        style={
+          Object {
+            "fontFamily": "Quicksand-Bold",
+            "textAlign": "right",
+          }
+        }
+      >
+        <FiatText
+          appendFiatCurrencyCode={true}
+          autoPrecision={true}
+          cryptoExchangeMultiplier="100000000"
+          nativeCryptoAmount="100000000"
+        />
+      </WithTheme(EdgeTextComponent)>
+    </View>
     <WithTheme(CardComponent)
       marginRem={0}
     >
@@ -42,7 +79,13 @@ exports[`Request should render with loaded props 1`] = `
         onExchangeAmountChanged={[Function]}
         onNext={[Function]}
         overridePrimaryExchangeAmount=""
-        primaryCurrencyInfo={Object {}}
+        primaryCurrencyInfo={
+          Object {
+            "displayDenomination": Object {
+              "multiplier": "100000000",
+            },
+          }
+        }
         secondaryCurrencyInfo={Object {}}
         topReturnKeyType="done"
       />

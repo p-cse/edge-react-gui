@@ -20,7 +20,7 @@ import { connect } from '../../types/reactRedux.js'
 import { type NavigationProp } from '../../types/routerTypes.js'
 import type { GuiCurrencyInfo, GuiDenomination, GuiWallet } from '../../types/types.js'
 import { getCurrencyIcon } from '../../util/CurrencyInfoHelpers.js'
-import { getCurrencyInfo, getDenomFromIsoCode, getObjectDiff } from '../../util/utils.js'
+import { convertNativeToDenomination, getCurrencyInfo, getDenomFromIsoCode, getObjectDiff, truncateDecimals } from '../../util/utils.js'
 import { SceneWrapper } from '../common/SceneWrapper.js'
 import { ButtonsModal } from '../modals/ButtonsModal.js'
 import { QrModal } from '../modals/QrModal.js'
@@ -30,6 +30,7 @@ import { type Theme, type ThemeProps, cacheStyles, withTheme } from '../services
 import { Card } from '../themed/Card.js'
 import { EdgeText } from '../themed/EdgeText.js'
 import { type ExchangedFlipInputAmounts, ExchangedFlipInput } from '../themed/ExchangedFlipInput.js'
+import { FiatText } from '../themed/FiatText.js'
 import { FlipInput } from '../themed/FlipInput.js'
 import { QrCode } from '../themed/QrCode'
 import { ShareButtons } from '../themed/ShareButtons.js'
@@ -274,10 +275,10 @@ export class RequestComponent extends React.Component<Props, State> {
   onError = (errorMessage?: string) => this.setState({ errorMessage })
 
   render() {
-    const { currencyIcon, exchangeSecondaryToPrimaryRatio, guiWallet, primaryCurrencyInfo, secondaryCurrencyInfo, theme } = this.props
+    const { currencyIcon, exchangeSecondaryToPrimaryRatio, edgeWallet, guiWallet, primaryCurrencyInfo, secondaryCurrencyInfo, theme } = this.props
     const styles = getStyles(theme)
 
-    if (guiWallet == null || primaryCurrencyInfo == null || secondaryCurrencyInfo == null || exchangeSecondaryToPrimaryRatio == null) {
+    if (guiWallet == null || primaryCurrencyInfo == null || secondaryCurrencyInfo == null || exchangeSecondaryToPrimaryRatio == null || edgeWallet == null) {
       return <ActivityIndicator color={theme.primaryText} style={styles.loader} size="large" />
     }
 
@@ -285,11 +286,33 @@ export class RequestComponent extends React.Component<Props, State> {
     const flipInputHeaderText = guiWallet ? sprintf(s.strings.send_to_wallet, guiWallet.name) : ''
     const { keysOnlyMode = false } = getSpecialCurrencyInfo(primaryCurrencyInfo.displayCurrencyCode)
 
+    // Balance
+    const nativeBalance = edgeWallet.balances[primaryCurrencyInfo.displayCurrencyCode] ?? '0'
+    const displayBalanceAmount = convertNativeToDenomination(primaryCurrencyInfo.displayDenomination.multiplier)(nativeBalance)
+    const displayBalanceString = sprintf(s.strings.request_balance, `${truncateDecimals(displayBalanceAmount)} ${primaryCurrencyInfo.displayDenomination.name}`)
+
+    // Selected denomination
+    const denomString = `1 ${primaryCurrencyInfo.displayDenomination.name}`
+
     return (
       <SceneWrapper background="header" hasTabs={false}>
         {keysOnlyMode !== true ? (
           <View style={styles.container}>
             <EdgeText style={styles.title}>{s.strings.fragment_request_subtitle}</EdgeText>
+            <EdgeText style={styles.exchangeRate}>{denomString}</EdgeText>
+            <View style={styles.balanceContainer}>
+              <EdgeText>{displayBalanceString}</EdgeText>
+              <EdgeText style={styles.exchangeRate}>
+                <FiatText
+                  nativeCryptoAmount={primaryCurrencyInfo.displayDenomination.multiplier}
+                  cryptoCurrencyCode={primaryCurrencyInfo.displayCurrencyCode}
+                  isoFiatCurrencyCode={guiWallet.isoFiatCurrencyCode}
+                  autoPrecision
+                  appendFiatCurrencyCode
+                  cryptoExchangeMultiplier={primaryCurrencyInfo.displayDenomination.multiplier}
+                />
+              </EdgeText>
+            </View>
 
             {this.state.errorMessage != null ? <EdgeText style={styles.errorText}>{this.state.errorMessage}</EdgeText> : null}
 
@@ -493,11 +516,19 @@ const getStyles = cacheStyles((theme: Theme) => ({
     justifyContent: 'flex-start',
     paddingHorizontal: theme.rem(1)
   },
+  balanceContainer: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    marginBottom: theme.rem(0.5)
+  },
+  exchangeRate: {
+    textAlign: 'right',
+    fontFamily: theme.fontFaceBold
+  },
 
   title: {
     fontFamily: theme.fontFaceMedium,
-    fontSize: theme.rem(2),
-    marginBottom: theme.rem(0.5)
+    fontSize: theme.rem(2)
   },
 
   rightChevronContainer: {
