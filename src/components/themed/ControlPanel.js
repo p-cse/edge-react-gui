@@ -58,7 +58,7 @@ export function ControlPanel(props: Props) {
   const selectedCurrencyCode = useSelector(state => state.ui.wallets.selectedCurrencyCode)
   const selectedWallet = useSelector(state => state.core.account.currencyWallets[state.ui.wallets.selectedWalletId])
   const guiWallet = useSelector(getSelectedWallet)
-  const currencyLogo = guiWallet != null ? getCurrencyIcon(guiWallet.currencyCode, selectedCurrencyCode).symbolImage : null
+  const currencyLogo = guiWallet != null ? getCurrencyIcon(selectedWallet.currencyInfo.pluginId, selectedCurrencyCode).symbolImage : null
   const { name: currencyDenomName, multiplier: currencyDenomMult } = useSelector(state =>
     guiWallet != null ? getDisplayDenomination(state, selectedWallet.currencyInfo.pluginId, selectedCurrencyCode) : { name: '', multiplier: '1' }
   )

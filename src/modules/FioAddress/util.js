@@ -5,7 +5,7 @@ import type { Disklet } from 'disklet'
 import type { EdgeAccount, EdgeCurrencyConfig, EdgeCurrencyWallet, EdgeDenomination } from 'edge-core-js'
 import { sprintf } from 'sprintf-js'
 
-import { FIO_STR, FIO_WALLET_TYPE } from '../../constants/WalletAndCurrencyConstants'
+import { FIO_STR, FIO_WALLET_TYPE, getPluginId } from '../../constants/WalletAndCurrencyConstants'
 import s from '../../locales/strings'
 import type { CcWalletMap } from '../../reducers/FioReducer'
 import type { FioAddress, FioConnectionWalletItem, FioDomain, FioObtRecord, GuiWallet } from '../../types/types'
@@ -395,7 +395,7 @@ export const makeConnectWallets = (wallets: { [walletId: string]: GuiWallet }, c
           key: `${wallets[walletKey].id}-${tokenData.currencyCode}`,
           id: wallets[walletKey].id,
           publicAddress,
-          ...getCurrencyIcon(wallets[walletKey].currencyCode, tokenData.currencyCode),
+          ...getCurrencyIcon(getPluginId(wallets[walletKey].type), tokenData.currencyCode),
           name: wallets[walletKey].name,
           currencyCode: tokenData.currencyCode,
           chainCode: wallets[walletKey].currencyCode,

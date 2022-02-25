@@ -235,7 +235,7 @@ class WalletListComponent extends React.PureComponent<Props> {
               createTokenType: {
                 currencyCode,
                 currencyName,
-                ...getCurrencyIcon(currencyInfo.currencyCode, currencyCode),
+                ...getCurrencyIcon(currencyInfo.pluginId, currencyCode),
                 parentCurrencyCode: currencyInfo.currencyCode
               }
             })

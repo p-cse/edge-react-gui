@@ -579,7 +579,7 @@ export const Request = connect<StateProps, DispatchProps, OwnProps>(
     const fioAddressesExist = !!state.ui.scenes.fioAddress.fioAddresses.length
 
     // Icon
-    const currencyIcon = getCurrencyIcon(guiWallet.currencyCode, currencyCode).symbolImage
+    const currencyIcon = getCurrencyIcon(edgeWallet.currencyInfo.pluginId, currencyCode).symbolImage
 
     return {
       currencyCode,

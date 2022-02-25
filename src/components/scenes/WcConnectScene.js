@@ -43,11 +43,11 @@ export const WcConnectScene = (props: Props) => {
   const { walletAddress, walletImageUri, walletName, wallet, currencyWallets } = useSelector(state => {
     const { currencyWallets } = state.core.account
     const guiWallet = getSelectedWallet(state)
+    const wallet = currencyWallets[guiWallet.id]
     const walletCurrencyCode = state.ui.wallets.selectedCurrencyCode
-    const walletImageUri = getCurrencyIcon(guiWallet.currencyCode, walletCurrencyCode).symbolImage
+    const walletImageUri = getCurrencyIcon(wallet.currencyInfo.pluginId, walletCurrencyCode).symbolImage
     const walletName = guiWallet.name
     const walletAddress = guiWallet.receiveAddress.publicAddress
-    const wallet = currencyWallets[guiWallet.id]
     return {
       walletAddress,
       walletImageUri,

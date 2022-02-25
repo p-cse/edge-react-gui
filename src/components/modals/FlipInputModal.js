@@ -308,7 +308,7 @@ export const FlipInputModal = connect<StateProps, DispatchProps, OwnProps>(
     const wallet = state.core.account.currencyWallets[walletId]
     const name = getWalletName(wallet)
     const { fiatCurrencyCode, isoFiatCurrencyCode } = getWalletFiat(wallet)
-    const { symbolImageDarkMono } = getCurrencyIcon(wallet.currencyInfo.currencyCode, currencyCode)
+    const { symbolImageDarkMono } = getCurrencyIcon(wallet.currencyInfo.pluginId, currencyCode)
     const { pluginId } = wallet.currencyInfo
 
     // Denominations

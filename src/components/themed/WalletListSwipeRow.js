@@ -6,7 +6,7 @@ import { SwipeRow } from 'react-native-swipe-list-view'
 
 import { Fontello } from '../../assets/vector/index.js'
 import { REQUEST, SEND, TRANSACTION_LIST } from '../../constants/SceneKeys.js'
-import { getSpecialCurrencyInfo, WALLET_LIST_OPTIONS_ICON } from '../../constants/WalletAndCurrencyConstants.js'
+import { getPluginId, getSpecialCurrencyInfo, WALLET_LIST_OPTIONS_ICON } from '../../constants/WalletAndCurrencyConstants.js'
 import { Actions } from '../../types/routerTypes.js'
 import type { GuiWallet } from '../../types/types.js'
 import { getCurrencyIcon } from '../../util/CurrencyInfoHelpers.js'
@@ -85,7 +85,7 @@ class WalletListSwipeRowComponent extends React.PureComponent<Props & ThemeProps
 
   handleOpenWalletListMenuModal = (): void => {
     const { currencyCode, guiWallet, isToken } = this.props
-    const { symbolImage } = getCurrencyIcon(guiWallet.currencyCode, currencyCode)
+    const { symbolImage } = getCurrencyIcon(getPluginId(guiWallet.type), currencyCode)
 
     this.closeRow()
     Airship.show(bridge => (
