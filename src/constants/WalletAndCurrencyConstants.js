@@ -104,6 +104,7 @@ export const getPluginId = (walletType: string): string => walletType.replace('w
 type SpecialCurrencyInfo = {|
   initWalletName: string,
   chainCode: string,
+  displayChainCode?: string,
 
   // Marketing:
   displayBuyCrypto?: boolean,
@@ -378,6 +379,7 @@ export const SPECIAL_CURRENCY_INFO: {
   binancesmartchain: {
     initWalletName: s.strings.string_first_binance_smart_chain_wallet_name,
     chainCode: 'BNB',
+    displayChainCode: 'BSC',
     allowZeroTx: true,
     isImportKeySupported: {
       privateKeyLabel: s.strings.create_wallet_import_input_key_or_seed_prompt,
