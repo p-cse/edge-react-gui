@@ -96,7 +96,9 @@ export const swapPlugins = {
   // shapeshift: ENV.SHAPESHIFT_INIT,
   sideshift: ENV.SIDESHIFT_INIT,
   switchain: ENV.SWITCHAIN_INIT,
-  transfer: true
+  transfer: true,
+  totle: ENV.TOTLE_INIT,
+  changehero: ENV.CHANGEHERO_INIT
 }
 
 export const allPlugins = {

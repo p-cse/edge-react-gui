@@ -1,6 +1,7 @@
 // @flow
 
 import { type Theme } from '../../../types/Theme.js'
+import changeheroLogo from './settingsExchangeChangehero.png'
 import changellyLogo from './settingsExchangeChangelly.png'
 import changenowLogo from './settingsExchangeChangenow.png'
 import defaultLogo from './settingsExchangeDefault.png'
@@ -42,5 +43,6 @@ export const swapPluginIcons = {
   foxExchange: foxExchangeLogo,
   godex: godexLogo,
   sideshift: sideshiftLogo,
-  switchain: switchainLogo
+  switchain: switchainLogo,
+  changehero: changeheroLogo
 }
