@@ -88,6 +88,7 @@ export const ratePlugins = {
 }
 
 export const swapPlugins = {
+  changehero: ENV.CHANGEHERO_INIT,
   changelly: ENV.CHANGELLY_INIT,
   changenow: ENV.CHANGE_NOW_INIT,
   exolix: ENV.EXOLIX_INIT,
@@ -97,8 +98,7 @@ export const swapPlugins = {
   sideshift: ENV.SIDESHIFT_INIT,
   switchain: ENV.SWITCHAIN_INIT,
   transfer: true,
-  totle: ENV.TOTLE_INIT,
-  changehero: ENV.CHANGEHERO_INIT
+  totle: ENV.TOTLE_INIT
 }
 
 export const allPlugins = {

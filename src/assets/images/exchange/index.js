@@ -22,6 +22,7 @@ export function getSwapPluginIcon(pluginId: string, theme?: Theme) {
 // Small icons for the settings using themes:
 export const swapThemePluginIcons = (pluginId: string, theme: Theme) => {
   const logos = {
+    changehero: theme.settingsChangeheroLogo,
     changelly: theme.settingsChangellyLogo,
     changenow: theme.settingsChangenowLogo,
     exolix: theme.settingsExolixLogo,
@@ -37,12 +38,12 @@ export const swapThemePluginIcons = (pluginId: string, theme: Theme) => {
 
 // Small icons for the settings:
 export const swapPluginIcons = {
+  changehero: changeheroLogo,
   changelly: changellyLogo,
   changenow: changenowLogo,
   exolix: exolixLogo,
   foxExchange: foxExchangeLogo,
   godex: godexLogo,
   sideshift: sideshiftLogo,
-  switchain: switchainLogo,
-  changehero: changeheroLogo
+  switchain: switchainLogo
 }
