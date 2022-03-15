@@ -189,7 +189,7 @@ const merchantPartners = [
   {
     givenName: 'ChangeHero',
     hasThumbnail: true,
-    thumbnailPath: 'https://developer.edge.app/content/changehero.png',
+    thumbnailPath: 'changehero.png',
     emailAddresses: [],
     postalAddresses: [],
     middleName: '',
